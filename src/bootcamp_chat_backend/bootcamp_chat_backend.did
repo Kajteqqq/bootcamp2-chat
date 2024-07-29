@@ -1,4 +1,4 @@
 service : {
-    "getNotes": () -> (vec text) query;
-    "addNote": (text) -> ();
+    "get_notes": (principal) -> (vec text) query;
+    "add_note": (text) -> ();
 }
