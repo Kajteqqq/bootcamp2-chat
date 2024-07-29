@@ -31,7 +31,8 @@ export default {
       console.log("Zalogowano", identity.getPrincipal())
       this.identity = identity;
       
-     //const agent = new HttpAgent({ identity });
+      const agent = await HttpAgent.create({ identity: this.identity })
+      this.backend = createActor(canisterId, { agent })
     }
   },
   mounted(){
@@ -45,12 +46,12 @@ export default {
     <img src="/logo2.svg" alt="DFINITY logo" />
     <br />
     <br />
-    {{ identity?.getPrincipal() }} <button @click="login">Login</button>
-    <div>
+    <div id="user">{{ identity?.getPrincipal() }} <button @click="login">login</button></div>
+    <div id="notes">
       {{ notes }}
     </div>
-    <div>
-      <textarea v-model="newNote"></textarea><button @click="dodajNotatke">Dodaj notatke</button>
+    <div id="sendMessage">
+      <textarea id="textarea" v-model="newNote"></textarea><button id="sendButton" @click="dodajNotatke">Prześlij</button>
     </div>
   </main>
 </template>
